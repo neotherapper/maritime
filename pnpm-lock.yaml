@@ -18,6 +18,12 @@ importers:
       '@eslint/js':
         specifier: ^9.29.0
         version: 9.29.0
+      '@msw/playwright':
+        specifier: ^0.3.1
+        version: 0.3.1(msw@2.10.2(typescript@5.8.3))
+      '@playwright/test':
+        specifier: ^1.53.1
+        version: 1.53.1
       '@storybook/addon-a11y':
         specifier: ^9.0.13
         version: 9.0.13(storybook@9.0.13(@testing-library/dom@10.4.0))
@@ -526,6 +532,12 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
+  '@msw/playwright@0.3.1':
+    resolution: {integrity: sha512-S4pf65FFBabegRdRb+K/IUZl+hlRK8NXiP5mAbr+DazipFvH1lX6c/6oem5IRsmgdYgmVAyBJrXgFQBlCXx30A==}
+    engines: {node: '>=20.0.0'}
+    peerDependencies:
+      msw: ^2.10.1
+
   '@mswjs/interceptors@0.39.2':
     resolution: {integrity: sha512-RuzCup9Ct91Y7V79xwCb146RaBRHZ7NBbrIUySumd1rpKqHL5OonaqrGIbug5hNwP/fRyxFMA6ISgw4FTtYFYg==}
     engines: {node: '>=18'}
@@ -554,6 +566,11 @@ packages:
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
+
+  '@playwright/test@1.53.1':
+    resolution: {integrity: sha512-Z4c23LHV0muZ8hfv4jw6HngPJkbbtZxTkxPNIg7cJcTc9C28N/p2q7g3JZS2SiKBBHJ3uM1dgDye66bB7LEk5w==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   '@polka/url@1.0.0-next.29':
     resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
@@ -1443,6 +1460,11 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
+  fsevents@2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
@@ -1883,6 +1905,16 @@ packages:
   picomatch@4.0.2:
     resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
     engines: {node: '>=12'}
+
+  playwright-core@1.53.1:
+    resolution: {integrity: sha512-Z46Oq7tLAyT0lGoFx4DOuB1IA9D1TPj0QkYxpPVUnGDqHHvDpCftu1J2hM2PiWsNMoZh8+LQaarAWcDfPBc6zg==}
+    engines: {node: '>=18'}
+    hasBin: true
+
+  playwright@1.53.1:
+    resolution: {integrity: sha512-LJ13YLr/ocweuwxyGf1XNFWIU4M2zUSo149Qbp+A4cpwDjsxRPj7k6H25LBrEHiEwxvRbD8HdwvQmRMSvquhYw==}
+    engines: {node: '>=18'}
+    hasBin: true
 
   polished@4.3.1:
     resolution: {integrity: sha512-OBatVyC/N7SCW/FaDHrSd+vn0o5cS855TOmYi4OkdWUMSJCET/xip//ch8xGUvtr3i44X9LVyWwQlRMTN3pwSA==}
@@ -2774,6 +2806,12 @@ snapshots:
       '@types/react': 19.1.8
       react: 19.1.0
 
+  '@msw/playwright@0.3.1(msw@2.10.2(typescript@5.8.3))':
+    dependencies:
+      '@mswjs/interceptors': 0.39.2
+      msw: 2.10.2(typescript@5.8.3)
+      outvariant: 1.4.3
+
   '@mswjs/interceptors@0.39.2':
     dependencies:
       '@open-draft/deferred-promise': 2.2.0
@@ -2806,6 +2844,10 @@ snapshots:
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
+
+  '@playwright/test@1.53.1':
+    dependencies:
+      playwright: 1.53.1
 
   '@polka/url@1.0.0-next.29': {}
 
@@ -3756,6 +3798,9 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
+  fsevents@2.3.2:
+    optional: true
+
   fsevents@2.3.3:
     optional: true
 
@@ -4138,6 +4183,14 @@ snapshots:
   picomatch@2.3.1: {}
 
   picomatch@4.0.2: {}
+
+  playwright-core@1.53.1: {}
+
+  playwright@1.53.1:
+    dependencies:
+      playwright-core: 1.53.1
+    optionalDependencies:
+      fsevents: 2.3.2
 
   polished@4.3.1:
     dependencies:

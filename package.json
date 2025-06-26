@@ -11,6 +11,9 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
+    "e2e": "pnpm e2e:run",
+    "e2e:headless": "pnpm playwright test",
+    "e2e:ui": "pnpm playwright test --ui",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -20,6 +23,8 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
+    "@msw/playwright": "^0.3.1",
+    "@playwright/test": "^1.53.1",
     "@storybook/addon-a11y": "^9.0.13",
     "@storybook/addon-docs": "^9.0.13",
     "@storybook/experimental-addon-test": "^8.6.14",

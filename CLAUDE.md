@@ -21,6 +21,11 @@ This project uses `pnpm` as the package manager.
 - **Watch tests**: `pnpm test`
 - **UI mode**: `pnpm test:ui`
 
+### E2E Testing with Playwright
+
+- **Run tests**: `pnpm e2e`
+- **UI mode**: `pnpm e2e:ui`
+
 ### Component Development with Storybook
 
 - **Run Storybook**: `pnpm storybook`
@@ -65,6 +70,13 @@ This is a React + TypeScript + Vite application with the following structure:
 - The application uses React 19 with the latest patterns (StrictMode, createRoot)
 - ESLint is configured with recommended rules for TypeScript, React Hooks, and React Refresh
 - Vite provides fast HMR (Hot Module Replacement) during development
+
+## General Instructions:
+
+- When generating new TypeScript code, please follow the existing coding style.
+- Ensure all new functions and classes have JSDoc comments.
+- Prefer functional programming paradigms where appropriate.
+- All code should be compatible with TypeScript 5.0 and Node.js 18+.
 
 # Code style
 
