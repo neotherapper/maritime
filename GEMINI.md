@@ -1,6 +1,6 @@
-# CLAUDE.md
+# GEMINI.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Gemini when working with code in this repository.
 
 ## Development Commands
 
@@ -40,6 +40,7 @@ This is a React + TypeScript + Vite application with the following structure:
 - **Vite** for build tooling and development server
 - **ESLint** with TypeScript support and React-specific rules
 - **pnpm** workspace configuration
+- **Tailwind CSS** for styling
 - **Tanstack Form** for forms
 - **Zod** for validation
 - **Zustand** for client state,
