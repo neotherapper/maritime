@@ -121,7 +121,7 @@ export const Step3: React.FC<Step3Props> = ({ onReview, onBack, onFieldChange, i
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <div className="w-[90%] sm:w-auto sm:max-w-xl mx-auto p-2 sm:p-6 bg-white rounded-lg shadow-lg">
       <div data-testid="step-indicator" className="text-center mb-6 text-gray-600 text-lg font-medium">
         Step 3 of 3
       </div>

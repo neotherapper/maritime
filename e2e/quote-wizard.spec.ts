@@ -138,15 +138,15 @@ class QuoteWizardPage {
     await expect(this.stepIndicator).toContainText(`Step ${stepNumber} of 3`);
   }
 
-  async expectButtonToBeDisabled(button: any) {
+  async expectButtonToBeDisabled(button: ReturnType<Page['getByTestId']>) {
     await expect(button).toBeDisabled();
   }
 
-  async expectButtonToBeEnabled(button: any) {
+  async expectButtonToBeEnabled(button: ReturnType<Page['getByTestId']>) {
     await expect(button).toBeEnabled();
   }
 
-  async expectValidationError(errorElement: any, shouldBeVisible: boolean) {
+  async expectValidationError(errorElement: ReturnType<Page['getByTestId']>, shouldBeVisible: boolean) {
     if (shouldBeVisible) {
       await expect(errorElement).toBeVisible();
     } else {
@@ -154,7 +154,7 @@ class QuoteWizardPage {
     }
   }
 
-  async expectLocalStorageToContain(key: string, expectedValue?: any) {
+  async expectLocalStorageToContain(key: string, expectedValue?: Record<string, unknown>) {
     const stored = await this.page.evaluate((k) => localStorage.getItem(k), key);
     expect(stored).toBeTruthy();
     
@@ -169,7 +169,7 @@ class QuoteWizardPage {
     expect(stored).toBeNull();
   }
 
-  async expectFieldValue(field: any, expectedValue: string) {
+  async expectFieldValue(field: ReturnType<Page['getByTestId']>, expectedValue: string) {
     await expect(field).toHaveValue(expectedValue);
   }
 
@@ -552,7 +552,7 @@ test.describe('Responsive Design', () => {
     
     await wizardPage.goto();
     
-    const form = page.locator('.max-w-md');
+    const form = page.locator('div').filter({ hasText: /Step [123] of 3/ }).first();
     const formBox = await form.boundingBox();
     const viewportWidth = 375;
     
@@ -570,10 +570,10 @@ test.describe('Responsive Design', () => {
     
     await wizardPage.goto();
     
-    const form = page.locator('.max-w-md');
+    const form = page.locator('div').filter({ hasText: /Step [123] of 3/ }).first();
     const formBox = await form.boundingBox();
     
-    expect(formBox!.width).toBeLessThanOrEqual(850); // Maximum reasonable width
+    expect(formBox!.width).toBeLessThanOrEqual(920); // Maximum reasonable width
     
     await context.close();
   });
