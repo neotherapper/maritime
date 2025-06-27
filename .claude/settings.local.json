@@ -32,7 +32,8 @@
       "Bash(rm:*)",
       "WebFetch(domain:tailwindcss.com)",
       "Bash(pnpm run:*)",
-      "Bash(pnpm dev:*)"
+      "Bash(pnpm dev:*)",
+      "Bash(git push:*)"
     ],
     "deny": []
   }
