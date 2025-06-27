@@ -58,6 +58,27 @@ This is a React + TypeScript + Vite application with the following structure:
   - `main.tsx` - Application entry point with React StrictMode
   - `assets/` - Static assets (images, etc.)
 - `public/` - Public static files served by Vite
+- `pages/` - Route components
+  - `QuoteWizard` - Main wizard page
+- `components/` - Reusable UI components
+  - `ui/` - Basic UI components
+  - `forms/` - Form-specific components
+  - `feedback/` - User feedback components
+- `modules/` - Feature modules
+  - `wizard/` - Quote Request Wizard
+    - `components/` - Quote Request Wizard components
+    - `context/` - Wizard-specific context
+    - `hooks/` - Wizard hooks
+    - `services/` - API services
+    - `store/` - State management
+    - `types/` - TypeScript types
+    - `utils/` - Utility functions
+    - `constants/` - Wizard constants
+- `shared/` - Shared utilities
+  - `components/` - Shared UI components
+  - `hooks/` - Shared hooks
+  - `services/` - Shared API services
+  - `store/` - Shared state management
 - TypeScript configuration split into `tsconfig.app.json` and `tsconfig.node.json`
 
 ### Configuration
