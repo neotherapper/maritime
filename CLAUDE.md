@@ -151,3 +151,16 @@ This project uses Tailwind CSS.
 
 - Avoid introducing new external dependencies unless absolutely necessary.
 - If a new dependency is required, please state the reason.
+
+# Commit Messages
+
+This project adheres to the Conventional Commits specification.
+Commit messages should be structured as follows:
+
+```
+<type>[optional scope]: <description>
+```
+
+**Type** must be one of: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
+**Scope** (optional) indicates the affected part of the codebase (e.g., `wizard`, `components`).
+**Description** is a concise summary of the change.
