@@ -1,23 +1,5 @@
 import { describe, it, expect } from 'vitest';
-
-// Types for validation results
-interface ValidationResult {
-  isValid: boolean;
-  error: string | null;
-}
-
-// Mock implementation that will be replaced by actual implementation
-const validateEmail = (email: string): ValidationResult => {
-  throw new Error('Implementation not yet created');
-};
-
-const validateRequired = (value: string): ValidationResult => {
-  throw new Error('Implementation not yet created');
-};
-
-const validateCargoValue = (value: string | number): ValidationResult => {
-  throw new Error('Implementation not yet created');
-};
+import { validateEmail, validateRequired, validateCargoValue } from './validation';
 
 describe('Feature: Maritime Insurance Quote Request Wizard Validation Utils', () => {
   describe('Scenario: Email validation', () => {

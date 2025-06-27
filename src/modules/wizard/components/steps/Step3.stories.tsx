@@ -1,129 +1,7 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { within, userEvent, expect, waitFor } from '@storybook/test';
-
-// Mock Step3 component matching the test interface
-interface Step3Props {
-  onReview: (data: { coverageLevel: string; cargoValue: number }) => void;
-  onBack: () => void;
-  initialData?: { coverageLevel: string; cargoValue: number };
-}
-
-const coverageLevels = ['Basic', 'Standard', 'Premium'];
-
-const Step3: React.FC<Step3Props> = ({ onReview, onBack, initialData }) => {
-  const [formData, setFormData] = React.useState({
-    coverageLevel: initialData?.coverageLevel || '',
-    cargoValue: initialData?.cargoValue?.toString() || ''
-  });
-  const [errors, setErrors] = React.useState<{ cargoValue?: string }>({});
-
-  const validateCargoValue = (value: string) => {
-    const numValue = parseFloat(value);
-    if (!value || isNaN(numValue) || numValue <= 0) {
-      return 'Cargo value must be a positive number';
-    }
-    return '';
-  };
-
-  const handleCargoValueChange = (value: string) => {
-    setFormData({ ...formData, cargoValue: value });
-    const error = validateCargoValue(value);
-    setErrors({ cargoValue: error });
-  };
-
-  const handleReview = () => {
-    const cargoValueNum = parseFloat(formData.cargoValue);
-    if (formData.coverageLevel && !errors.cargoValue && cargoValueNum > 0) {
-      onReview({ coverageLevel: formData.coverageLevel, cargoValue: cargoValueNum });
-    }
-  };
-
-  const isFormValid = formData.coverageLevel && formData.cargoValue && !errors.cargoValue && parseFloat(formData.cargoValue) > 0;
-
-  // Auto-save to localStorage on field changes (for integration testing)
-  React.useEffect(() => {
-    if (formData.coverageLevel || formData.cargoValue) {
-      const draftData = {
-        step1: JSON.parse(localStorage.getItem('quoteDraft') || '{}').step1 || {},
-        step2: JSON.parse(localStorage.getItem('quoteDraft') || '{}').step2 || {},
-        step3: { coverageLevel: formData.coverageLevel, cargoValue: formData.cargoValue }
-      };
-      localStorage.setItem('quoteDraft', JSON.stringify(draftData));
-    }
-  }, [formData.coverageLevel, formData.cargoValue]);
-
-  return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div data-testid="step-indicator" className="text-center mb-6 text-gray-600">
-        Step 3 of 3
-      </div>
-      
-      <div className="space-y-4">
-        <div>
-          <fieldset>
-            <legend className="block text-sm font-medium text-gray-700 mb-3">Coverage Level</legend>
-            <div className="space-y-2">
-              {coverageLevels.map((level) => (
-                <label key={level} className="flex items-center">
-                  <input
-                    type="radio"
-                    name="coverage-level"
-                    value={level}
-                    checked={formData.coverageLevel === level}
-                    onChange={(e) => setFormData({ ...formData, coverageLevel: e.target.value })}
-                    className="mr-2"
-                    data-testid={`coverage-${level.toLowerCase()}`}
-                  />
-                  <span>{level}</span>
-                </label>
-              ))}
-            </div>
-          </fieldset>
-        </div>
-
-        <div>
-          <label htmlFor="cargo-value" className="block text-sm font-medium text-gray-700 mb-1">
-            Cargo Value ($)
-          </label>
-          <input
-            id="cargo-value"
-            data-testid="cargo-value"
-            type="number"
-            min="1"
-            value={formData.cargoValue}
-            onChange={(e) => handleCargoValueChange(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter cargo value"
-          />
-          {errors.cargoValue && (
-            <div data-testid="cargo-value-error" className="text-red-600 text-sm mt-1">
-              {errors.cargoValue}
-            </div>
-          )}
-        </div>
-
-        <div className="flex space-x-4 pt-4">
-          <button
-            data-testid="back-button"
-            onClick={onBack}
-            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
-          >
-            Back
-          </button>
-          <button
-            data-testid="review-button"
-            onClick={handleReview}
-            disabled={!isFormValid}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed"
-          >
-            Review
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { within, userEvent, expect, waitFor } from 'storybook/test';
+import { Step3 } from './Step3';
 
 const meta: Meta<typeof Step3> = {
   title: 'Features/Maritime Quote Wizard/Step3',
@@ -362,7 +240,7 @@ export const ErrorState: Story = {
     // Try to proceed - would show error in real implementation
     try {
       await userEvent.click(canvas.getByTestId('review-button'));
-    } catch (error) {
+    } catch {
       // Expected error for demo purposes
     }
   },

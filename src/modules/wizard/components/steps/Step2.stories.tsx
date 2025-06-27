@@ -1,93 +1,7 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { within, userEvent, expect, waitFor } from '@storybook/test';
-
-// Mock Step2 component matching the test interface
-interface Step2Props {
-  onNext: (data: { vesselName: string; vesselType: string }) => void;
-  onBack: () => void;
-  initialData?: { vesselName: string; vesselType: string };
-}
-
-const vesselTypes = ['Bulk Carrier', 'Oil Tanker', 'Container Ship'];
-
-const Step2: React.FC<Step2Props> = ({ onNext, onBack, initialData }) => {
-  const [formData, setFormData] = React.useState({
-    vesselName: initialData?.vesselName || '',
-    vesselType: initialData?.vesselType || ''
-  });
-
-  const handleNext = () => {
-    if (formData.vesselName && formData.vesselType) {
-      onNext(formData);
-    }
-  };
-
-  const isFormValid = formData.vesselName && formData.vesselType;
-
-  return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div data-testid="step-indicator" className="text-center mb-6 text-gray-600">
-        Step 2 of 3
-      </div>
-      
-      <div className="space-y-4">
-        <div>
-          <label htmlFor="vessel-name" className="block text-sm font-medium text-gray-700 mb-1">
-            Vessel Name
-          </label>
-          <input
-            id="vessel-name"
-            data-testid="vessel-name"
-            type="text"
-            value={formData.vesselName}
-            onChange={(e) => setFormData({ ...formData, vesselName: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter vessel name"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="vessel-type" className="block text-sm font-medium text-gray-700 mb-1">
-            Vessel Type
-          </label>
-          <select
-            id="vessel-type"
-            data-testid="vessel-type"
-            value={formData.vesselType}
-            onChange={(e) => setFormData({ ...formData, vesselType: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="">Select vessel type</option>
-            {vesselTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="flex space-x-4 pt-4">
-          <button
-            data-testid="back-button"
-            onClick={onBack}
-            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
-          >
-            Back
-          </button>
-          <button
-            data-testid="next-button"
-            onClick={handleNext}
-            disabled={!isFormValid}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed"
-          >
-            Next
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { within, userEvent, expect } from 'storybook/test';
+import { Step2 } from './Step2';
 
 const meta: Meta<typeof Step2> = {
   title: 'Features/Maritime Quote Wizard/Step2',
@@ -258,7 +172,7 @@ export const ErrorState: Story = {
     // Try to proceed - would show error in real implementation
     try {
       await userEvent.click(canvas.getByTestId('next-button'));
-    } catch (error) {
+    } catch {
       // Expected error for demo purposes
     }
   },

@@ -1,120 +1,7 @@
 import React from 'react';
-import type { Meta, StoryObj } from '@storybook/react';
-import { within, userEvent, expect, waitFor } from '@storybook/test';
-import { http, HttpResponse } from 'msw';
-
-// Mock Step1 component matching the test interface
-interface Step1Props {
-  onNext: (data: { companyName: string; contactEmail: string }) => void;
-  onSaveDraft: (data: { companyName: string; contactEmail: string }) => void;
-  initialData?: { companyName: string; contactEmail: string };
-}
-
-const Step1: React.FC<Step1Props> = ({ onNext, onSaveDraft, initialData }) => {
-  const [formData, setFormData] = React.useState({
-    companyName: initialData?.companyName || '',
-    contactEmail: initialData?.contactEmail || ''
-  });
-  const [errors, setErrors] = React.useState<{ email?: string }>({});
-  const [draftSaved, setDraftSaved] = React.useState(false);
-
-  const validateEmail = (email: string) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const handleEmailBlur = () => {
-    if (formData.contactEmail && !validateEmail(formData.contactEmail)) {
-      setErrors({ email: 'Please enter a valid email address' });
-    } else {
-      setErrors({});
-    }
-  };
-
-  const handleSaveDraft = () => {
-    onSaveDraft(formData);
-    setDraftSaved(true);
-    setTimeout(() => setDraftSaved(false), 3000);
-  };
-
-  const handleNext = () => {
-    if (formData.companyName && formData.contactEmail && !errors.email) {
-      onNext(formData);
-    }
-  };
-
-  const isFormValid = formData.companyName && formData.contactEmail && !errors.email;
-
-  return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <div data-testid="step-indicator" className="text-center mb-6 text-gray-600">
-        Step 1 of 3
-      </div>
-      
-      <div className="space-y-4">
-        <div>
-          <label htmlFor="company-name" className="block text-sm font-medium text-gray-700 mb-1">
-            Company Name
-          </label>
-          <input
-            id="company-name"
-            data-testid="company-name"
-            type="text"
-            value={formData.companyName}
-            onChange={(e) => setFormData({ ...formData, companyName: e.target.value })}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter company name"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 mb-1">
-            Contact Email
-          </label>
-          <input
-            id="contact-email"
-            data-testid="contact-email"
-            type="email"
-            value={formData.contactEmail}
-            onChange={(e) => setFormData({ ...formData, contactEmail: e.target.value })}
-            onBlur={handleEmailBlur}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="Enter contact email"
-          />
-          {errors.email && (
-            <div data-testid="email-error" className="text-red-600 text-sm mt-1">
-              {errors.email}
-            </div>
-          )}
-        </div>
-
-        {draftSaved && (
-          <div data-testid="draft-saved-message" className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
-            Draft saved successfully!
-          </div>
-        )}
-
-        <div className="flex space-x-4 pt-4">
-          <button
-            data-testid="save-draft-button"
-            onClick={handleSaveDraft}
-            className="px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
-          >
-            Save Draft
-          </button>
-          <button
-            data-testid="next-button"
-            onClick={handleNext}
-            disabled={!isFormValid}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed"
-          >
-            Next
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { within, userEvent, expect, waitFor } from 'storybook/test';
+import { Step1 } from './Step1';
 
 const meta: Meta<typeof Step1> = {
   title: 'Features/Maritime Quote Wizard/Step1',
@@ -158,7 +45,7 @@ export const SaveDraftFunctionality: Story = {
       localStorage.setItem('quoteDraft', JSON.stringify({ step1: data }));
     },
   },
-  play: async ({ canvasElement, args }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
 
     // Given: I am on Step 1 of the wizard

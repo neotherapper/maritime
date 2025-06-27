@@ -21,7 +21,15 @@
       "WebFetch(domain:storybook.js.org)",
       "Bash(pnpm list:*)",
       "Bash(npx storybook@latest add:*)",
-      "Bash(timeout 30s pnpm storybook)"
+      "Bash(timeout 30s pnpm storybook)",
+      "Bash(mv:*)",
+      "mcp__filesystem__list_allowed_directories",
+      "mcp__filesystem__read_multiple_files",
+      "mcp__filesystem__read_file",
+      "mcp__filesystem__edit_file",
+      "Bash(pnpm tsc:*)",
+      "Bash(grep:*)",
+      "Bash(rm:*)"
     ],
     "deny": []
   }
