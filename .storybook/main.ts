@@ -7,7 +7,7 @@ const config: StorybookConfig = {
   ],
   "addons": [
     "@storybook/addon-docs",
-    "@storybook/experimental-addon-test",
+    "@storybook/addon-vitest",
     "@storybook/addon-a11y",
     "msw-storybook-addon"
   ],
