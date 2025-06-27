@@ -30,7 +30,8 @@
       "Bash(pnpm tsc:*)",
       "Bash(grep:*)",
       "Bash(rm:*)",
-      "WebFetch(domain:tailwindcss.com)"
+      "WebFetch(domain:tailwindcss.com)",
+      "Bash(pnpm run:*)"
     ],
     "deny": []
   }
