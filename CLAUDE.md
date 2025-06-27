@@ -57,6 +57,11 @@ Common E2E issues to check:
 
 - **Run Storybook**: `pnpm storybook`
 - **Build Storybook**: `pnpm build-storybook`
+- **Test stories**: `pnpm test:stories` - Test Storybook components with portable stories
+- **Watch story tests**: `pnpm test:stories:watch`
+- **Story test UI**: `pnpm test:stories:ui`
+
+Stories use `tags: ['test']` and `composeStories` from `@storybook/react` for testing with Vitest.
 
 ### Type Checking
 

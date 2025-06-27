@@ -34,7 +34,11 @@
       "Bash(pnpm run:*)",
       "Bash(pnpm dev:*)",
       "Bash(git push:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(pnpm vitest run:*)",
+      "Bash(pnpm storybook:*)"
     ],
     "deny": []
   }
