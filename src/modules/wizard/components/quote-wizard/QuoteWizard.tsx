@@ -1,158 +1,73 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Step1 } from '../steps/Step1';
 import { Step2 } from '../steps/Step2';
 import { Step3 } from '../steps/Step3';
 import { Review } from '../review/Review';
 import type { QuoteRequest } from '../review/Review';
 import { submitQuoteRequest } from '../../services/api';
-
-interface QuoteWizardState {
-  currentStep: number;
-  step1Data: { companyName: string; contactEmail: string };
-  step2Data: { vesselName: string; vesselType: string };
-  step3Data: { coverageLevel: string; cargoValue: number };
-  isSubmitting: boolean;
-  submitError: string | null;
-  isSubmitted: boolean;
-}
-
-const STORAGE_KEY = 'quoteDraft';
+import { useQuoteWizardContext } from '../../hooks/useQuoteWizardContext';
 
 export const QuoteWizard: React.FC = () => {
-  const [state, setState] = useState<QuoteWizardState>({
-    currentStep: 1,
-    step1Data: { companyName: '', contactEmail: '' },
-    step2Data: { vesselName: '', vesselType: '' },
-    step3Data: { coverageLevel: '', cargoValue: 0 },
-    isSubmitting: false,
-    submitError: null,
-    isSubmitted: false
-  });
-
-  // Load draft from localStorage on mount
-  useEffect(() => {
-    const savedDraft = localStorage.getItem(STORAGE_KEY);
-    if (savedDraft) {
-      try {
-        const draft = JSON.parse(savedDraft);
-        const newState: Partial<QuoteWizardState> = {};
-        
-        if (draft.step1) {
-          newState.step1Data = draft.step1;
-        }
-        
-        if (draft.step2) {
-          newState.step2Data = draft.step2;
-        }
-        
-        if (draft.step3) {
-          newState.step3Data = draft.step3;
-        }
-        
-        // Determine which step to start on based on completed data
-        if (draft.step3 && draft.step3.coverageLevel && draft.step3.cargoValue) {
-          newState.currentStep = 3;
-        } else if (draft.step2 && draft.step2.vesselName && draft.step2.vesselType) {
-          newState.currentStep = 2;
-        } else {
-          newState.currentStep = 1;
-        }
-        
-        setState(prev => ({ ...prev, ...newState }));
-      } catch (error) {
-        console.error('Failed to parse saved draft:', error);
-        localStorage.removeItem(STORAGE_KEY);
-      }
-    }
-  }, []);
-
-  // Save to localStorage whenever state changes
-  const saveDraft = (updates: Partial<QuoteWizardState>) => {
-    const newState = { ...state, ...updates };
-    const draft = {
-      step1: newState.step1Data,
-      step2: newState.step2Data,
-      step3: newState.step3Data
-    };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
-  };
+  const { state, dispatch } = useQuoteWizardContext();
 
   // Handle Step 1 next
   const handleStep1Next = (data: { companyName: string; contactEmail: string }) => {
-    const updates = {
-      step1Data: data,
-      currentStep: 2
-    };
-    setState(prev => ({ ...prev, ...updates }));
-    saveDraft(updates);
+    dispatch({ type: 'UPDATE_STEP1_DATA', payload: data });
+    dispatch({ type: 'SET_CURRENT_STEP', payload: 2 });
   };
 
   // Handle Step 1 save draft
   const handleStep1SaveDraft = (data: { companyName: string; contactEmail: string }) => {
-    const updates = { step1Data: data };
-    setState(prev => ({ ...prev, ...updates }));
-    saveDraft(updates);
+    dispatch({ type: 'UPDATE_STEP1_DATA', payload: data });
   };
 
   // Handle Step 1 field changes (real-time persistence)
   const handleStep1FieldChange = (data: { companyName: string; contactEmail: string }) => {
-    const updates = { step1Data: data };
-    setState(prev => ({ ...prev, ...updates }));
-    saveDraft(updates);
+    dispatch({ type: 'UPDATE_STEP1_DATA', payload: data });
   };
 
   // Handle Step 2 field changes (real-time persistence)
   const handleStep2FieldChange = (data: { vesselName: string; vesselType: string }) => {
-    const updates = { step2Data: data };
-    setState(prev => ({ ...prev, ...updates }));
-    saveDraft(updates);
+    dispatch({ type: 'UPDATE_STEP2_DATA', payload: data });
   };
 
   // Handle Step 3 field changes (real-time persistence)
   const handleStep3FieldChange = (data: { coverageLevel: string; cargoValue: number }) => {
-    const updates = { step3Data: data };
-    setState(prev => ({ ...prev, ...updates }));
-    saveDraft(updates);
+    dispatch({ type: 'UPDATE_STEP3_DATA', payload: data });
   };
 
   // Handle Step 2 next
   const handleStep2Next = (data: { vesselName: string; vesselType: string }) => {
-    const updates = {
-      step2Data: data,
-      currentStep: 3
-    };
-    setState(prev => ({ ...prev, ...updates }));
-    saveDraft(updates);
+    dispatch({ type: 'UPDATE_STEP2_DATA', payload: data });
+    dispatch({ type: 'SET_CURRENT_STEP', payload: 3 });
   };
 
   // Handle Step 2 back
   const handleStep2Back = () => {
-    setState(prev => ({ ...prev, currentStep: 1 }));
+    dispatch({ type: 'SET_CURRENT_STEP', payload: 1 });
   };
 
   // Handle Step 3 review
   const handleStep3Review = (data: { coverageLevel: string; cargoValue: number }) => {
-    const updates = {
-      step3Data: data,
-      currentStep: 4
-    };
-    setState(prev => ({ ...prev, ...updates }));
-    saveDraft(updates);
+    dispatch({ type: 'UPDATE_STEP3_DATA', payload: data });
+    dispatch({ type: 'SET_CURRENT_STEP', payload: 4 });
   };
 
   // Handle Step 3 back
   const handleStep3Back = () => {
-    setState(prev => ({ ...prev, currentStep: 2 }));
+    dispatch({ type: 'SET_CURRENT_STEP', payload: 2 });
   };
 
   // Handle review back
   const handleReviewBack = () => {
-    setState(prev => ({ ...prev, currentStep: 3, submitError: null }));
+    dispatch({ type: 'SET_CURRENT_STEP', payload: 3 });
+    dispatch({ type: 'SET_SUBMIT_ERROR', payload: null });
   };
 
   // Handle submit
   const handleSubmit = async () => {
-    setState(prev => ({ ...prev, isSubmitting: true, submitError: null }));
+    dispatch({ type: 'SET_SUBMITTING', payload: true });
+    dispatch({ type: 'SET_SUBMIT_ERROR', payload: null });
 
     const quoteRequest: QuoteRequest = {
       companyName: state.step1Data.companyName,
@@ -166,22 +81,13 @@ export const QuoteWizard: React.FC = () => {
     try {
       await submitQuoteRequest(quoteRequest);
       
-      // Clear localStorage on successful submission
-      localStorage.removeItem(STORAGE_KEY);
-      
-      setState(prev => ({ 
-        ...prev, 
-        isSubmitting: false, 
-        isSubmitted: true,
-        submitError: null
-      }));
+      dispatch({ type: 'SET_SUBMITTING', payload: false });
+      dispatch({ type: 'SET_SUBMITTED', payload: true });
+      dispatch({ type: 'SET_SUBMIT_ERROR', payload: null });
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
-      setState(prev => ({ 
-        ...prev, 
-        isSubmitting: false, 
-        submitError: errorMessage
-      }));
+      dispatch({ type: 'SET_SUBMITTING', payload: false });
+      dispatch({ type: 'SET_SUBMIT_ERROR', payload: errorMessage });
     }
   };
 

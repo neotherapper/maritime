@@ -3,6 +3,7 @@ import { expect, userEvent, waitFor, within } from "storybook/test";
 import { http, HttpResponse } from "msw";
 import React from "react";
 import { QuoteWizard } from './QuoteWizard';
+import { QuoteWizardProvider } from '../../context/QuoteWizardContext';
 
 const meta: Meta<typeof QuoteWizard> = {
   title: "Features/Maritime Quote Wizard/Complete Flow",
@@ -23,7 +24,11 @@ const meta: Meta<typeof QuoteWizard> = {
       React.useEffect(() => {
         localStorage.clear();
       }, []);
-      return <Story />;
+      return (
+        <QuoteWizardProvider>
+          <Story />
+        </QuoteWizardProvider>
+      );
     },
   ],
 };
@@ -175,7 +180,11 @@ export const ResumeWizardAtCorrectStep: Story = {
         );
       }, []);
 
-      return <Story />;
+      return (
+        <QuoteWizardProvider>
+          <Story />
+        </QuoteWizardProvider>
+      );
     },
   ],
   play: async ({ canvasElement }) => {
