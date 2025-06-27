@@ -29,7 +29,8 @@
       "mcp__filesystem__edit_file",
       "Bash(pnpm tsc:*)",
       "Bash(grep:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "WebFetch(domain:tailwindcss.com)"
     ],
     "deny": []
   }
