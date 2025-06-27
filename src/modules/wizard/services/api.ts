@@ -38,13 +38,20 @@ export const submitQuoteRequest = async (quoteRequest: QuoteRequest): Promise<Ap
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), TIMEOUT_MS);
 
+  // Type-safe window interface for testing
+  interface TestWindow extends Window {
+    TEST_API_ENDPOINT?: string;
+    TEST_API_ERROR?: boolean;
+    TEST_API_TIMEOUT?: boolean;
+  }
+  
   // Allow test endpoint override for E2E testing
-  const testEndpoint = (window as any).TEST_API_ENDPOINT;
+  const testEndpoint = (window as TestWindow).TEST_API_ENDPOINT;
   const endpoint = testEndpoint || `${API_BASE_URL}/posts`;
   
   // Check for test error flag
-  const testError = (window as any).TEST_API_ERROR;
-  const testTimeout = (window as any).TEST_API_TIMEOUT;
+  const testError = (window as TestWindow).TEST_API_ERROR;
+  const testTimeout = (window as TestWindow).TEST_API_TIMEOUT;
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };

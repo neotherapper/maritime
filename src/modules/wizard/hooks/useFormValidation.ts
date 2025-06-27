@@ -5,7 +5,7 @@ export interface ValidationErrors {
   [key: string]: string | undefined;
 }
 
-export const useFormValidation = <T extends Record<string, any>>(
+export const useFormValidation = <T extends Record<string, unknown>>(
   initialData: T,
   validators: { [K in keyof T]?: (value: T[K]) => string | null }
 ) => {
