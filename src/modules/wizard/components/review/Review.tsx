@@ -36,7 +36,7 @@ export const Review: React.FC<ReviewProps> = ({
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-lg">
+    <div className="w-[90%] md:w-auto md:max-w-md mx-auto p-2 md:p-6 bg-white rounded-lg shadow-lg">
       <div className="text-center mb-6">
         <h2 className="text-xl font-semibold text-gray-800 mb-2">Review Your Quote Request</h2>
         <p className="text-gray-600">Please review the information below before submitting</p>

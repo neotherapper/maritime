@@ -116,7 +116,7 @@ export const Step1: React.FC<Step1Props> = ({ onNext, onSaveDraft, onFieldChange
   };
 
   return (
-    <div className="w-[90%] sm:w-auto sm:max-w-xl mx-auto p-2 sm:p-6 bg-white rounded-lg shadow-lg">
+    <div className="w-[90%] md:w-auto md:max-w-md mx-auto p-2 md:p-6 bg-white rounded-lg shadow-lg">
       <div data-testid="step-indicator" className="text-center mb-6 text-gray-600 text-lg font-medium">
         Step 1 of 3
       </div>
