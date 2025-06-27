@@ -15,8 +15,12 @@ This project uses `pnpm` as the package manager.
 - **Linting**: `pnpm lint` - Runs ESLint on all files
 - **Preview**: `pnpm preview` - Preview the production build locally
 
-### Testing
+### Testing Strategy
 
+- Unit tests for domain logic
+- Component tests for React components using Storybook testing
+- Integration tests for API routes
+- E2E tests for critical user flows
 - Unit tests should be placed in the same folder as the file they are testing against.
 - **Run tests**: `pnpm test:run`
 - **Watch tests**: `pnpm test`
@@ -122,12 +126,14 @@ This is a React + TypeScript + Vite application with the following structure:
 - Ensure all new functions and classes have JSDoc comments.
 - Prefer functional programming paradigms where appropriate.
 - All code should be compatible with TypeScript 5.0 and Node.js 18+.
+- Ensure all suggestions align with modern JavaScript/React best practices (e.g., ES6+, React 18).
 
 # Code style
 
 - Use ES modules (import/export) syntax, not CommonJS (require)
 - Destructure imports when possible (eg. import { foo } from 'bar')
 - Always use strict equality (`===` and `!==`).
+- Absolute imports with path mapping
 
 # Styling
 
