@@ -1,0 +1,19 @@
+{
+  "theme": "GitHub",
+  "sandbox": "docker",
+  "toolDiscoveryCommand": "bin/get_tools",
+  "toolCallCommand": "bin/call_tool",
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
+    }
+  },
+  "telemetry": {
+    "enabled": true,
+    "target": "local",
+    "otlpEndpoint": "http://localhost:4317",
+    "logPrompts": true
+  },
+  "usageStatisticsEnabled": true
+}

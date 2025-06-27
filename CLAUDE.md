@@ -15,8 +15,13 @@ This project uses `pnpm` as the package manager.
 - **Linting**: `pnpm lint` - Runs ESLint on all files
 - **Preview**: `pnpm preview` - Preview the production build locally
 
-### Testing
+### Testing Strategy
 
+- Unit tests for domain logic
+- Component tests for React components using Storybook testing
+- Integration tests for API routes
+- E2E tests for critical user flows
+- Unit tests should be placed in the same folder as the file they are testing against.
 - **Run tests**: `pnpm test:run`
 - **Watch tests**: `pnpm test`
 - **UI mode**: `pnpm test:ui`
@@ -25,11 +30,38 @@ This project uses `pnpm` as the package manager.
 
 - **Run tests**: `pnpm e2e`
 - **UI mode**: `pnpm e2e:ui`
+- **Debug mode**: `pnpm playwright test --debug` - Opens browser for debugging
+- **Headed mode**: `pnpm playwright test --headed` - Shows browser during test execution
+
+#### E2E Testing Notes for AI Agents
+
+Since AI agents cannot see the browser UI during E2E tests, use these approaches for effective debugging:
+
+1. **Use headed mode** (`--headed`) to see browser interactions in terminal output
+2. **Add console.log statements** in test files to track execution flow
+3. **Use Playwright's built-in assertions** which provide detailed error messages
+4. **Check for element visibility issues** by adding explicit waits
+5. **Verify routing** - ensure the app navigates to correct URLs
+6. **Mock API responses** properly in `/src/mocks/handlers.ts`
+7. **Check test data-testid attributes** match between components and tests
+
+Common E2E issues to check:
+
+- Missing or incorrect data-testid attributes
+- Component import path issues after folder restructuring
+- API mocking configuration
+- Routing configuration
+- Element timing and visibility
 
 ### Component Development with Storybook
 
 - **Run Storybook**: `pnpm storybook`
 - **Build Storybook**: `pnpm build-storybook`
+- **Test stories**: `pnpm test:stories` - Test Storybook components with portable stories
+- **Watch story tests**: `pnpm test:stories:watch`
+- **Story test UI**: `pnpm test:stories:ui`
+
+Stories use `tags: ['test']` and `composeStories` from `@storybook/react` for testing with Vitest.
 
 ### Type Checking
 
@@ -98,12 +130,14 @@ This is a React + TypeScript + Vite application with the following structure:
 - Ensure all new functions and classes have JSDoc comments.
 - Prefer functional programming paradigms where appropriate.
 - All code should be compatible with TypeScript 5.0 and Node.js 18+.
+- Ensure all suggestions align with modern JavaScript/React best practices (e.g., ES6+, React 18).
 
 # Code style
 
 - Use ES modules (import/export) syntax, not CommonJS (require)
 - Destructure imports when possible (eg. import { foo } from 'bar')
 - Always use strict equality (`===` and `!==`).
+- Absolute imports with path mapping
 
 # Styling
 
@@ -122,3 +156,16 @@ This project uses Tailwind CSS.
 
 - Avoid introducing new external dependencies unless absolutely necessary.
 - If a new dependency is required, please state the reason.
+
+# Commit Messages
+
+This project adheres to the Conventional Commits specification.
+Commit messages should be structured as follows:
+
+```
+<type>[optional scope]: <description>
+```
+
+**Type** must be one of: `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`, `revert`.
+**Scope** (optional) indicates the affected part of the codebase (e.g., `wizard`, `components`).
+**Description** is a concise summary of the change.

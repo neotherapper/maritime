@@ -20,6 +20,10 @@
       "env": {
         "BRAVE_API_KEY": ""
       }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["@playwright/mcp@latest"]
     }
   }
 }

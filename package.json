@@ -12,14 +12,18 @@
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
     "e2e": "pnpm e2e:run",
-    "e2e:headless": "pnpm playwright test",
+    "e2e:run": "pnpm playwright test",
     "e2e:ui": "pnpm playwright test --ui",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test:stories": "vitest run --run -t \"story\"",
+    "test:stories:watch": "vitest -t \"story\"",
+    "test:stories:ui": "vitest --ui -t \"story\""
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",
@@ -27,18 +31,23 @@
     "@playwright/test": "^1.53.1",
     "@storybook/addon-a11y": "^9.0.13",
     "@storybook/addon-docs": "^9.0.13",
-    "@storybook/experimental-addon-test": "^8.6.14",
+    "@storybook/addon-vitest": "^9.0.13",
+    "@storybook/react": "^9.0.13",
     "@storybook/react-vite": "^9.0.13",
     "@storybook/test": "^8.6.14",
     "@tailwindcss/postcss": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.11",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.5.2",
+    "@vitest/browser": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4",
     "@vitest/ui": "^3.2.4",
     "autoprefixer": "^10.4.21",
+    "concurrently": "^9.2.0",
     "eslint": "^9.29.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
@@ -52,7 +61,8 @@
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.34.1",
-    "vite": "^7.0.0",
-    "vitest": "^3.2.4"
+    "vite": "^5.0.0",
+    "vitest": "^3.2.4",
+    "wait-on": "^8.0.3"
   }
 }

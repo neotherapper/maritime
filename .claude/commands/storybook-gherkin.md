@@ -54,3 +54,4 @@ const canvas = within(canvasElement);
 },
 };
 Include stories for loading states, error states, and successful interactions.
+Since we are using TDD do assume that component files do not exist yet.

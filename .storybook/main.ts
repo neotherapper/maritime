@@ -7,7 +7,12 @@ const config: StorybookConfig = {
   ],
   "addons": [
     "@storybook/addon-docs",
-    "@storybook/experimental-addon-test",
+    {
+      name: "@storybook/addon-vitest",
+      options: {
+        configFile: "vitest.stories.config.ts"
+      }
+    },
     "@storybook/addon-a11y",
     "msw-storybook-addon"
   ],

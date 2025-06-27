@@ -1,24 +1,20 @@
-import { useEffect, useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { QuoteWizard } from './modules/wizard/components/quote-wizard/QuoteWizard';
+import { QuoteWizardProvider } from './modules/wizard/context/QuoteWizardContext';
 import './App.css';
 
 function App() {
-  const [users, setUsers] = useState<{ id: number; name: string }[]>([]);
-
-  useEffect(() => {
-    fetch('/api/users')
-      .then((res) => res.json())
-      .then(setUsers);
-  }, []);
-
   return (
-    <>
-      <h1>Users</h1>
-      <ul>
-        {users.map((user) => (
-          <li key={user.id}>{user.name}</li>
-        ))}
-      </ul>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Navigate to="/quote-wizard" replace />} />
+        <Route path="/quote-wizard" element={
+          <QuoteWizardProvider>
+            <QuoteWizard />
+          </QuoteWizardProvider>
+        } />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
