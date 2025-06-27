@@ -27,3 +27,6 @@ dist-ssr
 storybook-static
 playwright-report
 test-results
+
+# AI
+_docs
