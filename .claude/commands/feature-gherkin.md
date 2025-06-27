@@ -25,3 +25,31 @@ REQUIREMENTS:
 10. Follow SOLID principles and clean code practices
 11. Add data-testid attributes matching test selectors
 12. Optimize for performance (memoization where needed)
+
+CODE STRUCTURE:
+
+import React from 'react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+
+interface [ComponentName]Props {
+// Props definition
+}
+
+export const [ComponentName]: React.FC<[ComponentName]Props> = ({ ...props }) => {
+// Implementation ensuring all tests pass
+
+return (
+<div data-testid="[component-name]">
+{/_ Component JSX _/}
+</div>
+);
+};
+
+Include:
+
+- Custom hooks for business logic
+- Utility functions for data transformation
+- Context providers if needed for state management
+- Error boundaries for error handling
+- Loading skeletons for async operations

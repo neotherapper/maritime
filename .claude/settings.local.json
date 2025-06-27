@@ -9,7 +9,19 @@
       "Bash(tsc:*)",
       "Bash(pnpm build:*)",
       "Bash(pnpm add:*)",
-      "Bash(pnpm playwright test:*)"
+      "Bash(pnpm playwright test:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm lint:*)",
+      "Bash(pkill:*)",
+      "Bash(pnpm e2e:*)",
+      "Bash(pnpm up:*)",
+      "Bash(npx playwright:*)",
+      "Bash(rg:*)",
+      "Bash(pnpm remove:*)",
+      "WebFetch(domain:storybook.js.org)",
+      "Bash(pnpm list:*)",
+      "Bash(npx storybook@latest add:*)",
+      "Bash(timeout 30s pnpm storybook)"
     ],
     "deny": []
   }
