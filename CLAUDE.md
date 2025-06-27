@@ -17,6 +17,7 @@ This project uses `pnpm` as the package manager.
 
 ### Testing
 
+- Unit tests should be placed in the same folder as the file they are testing against.
 - **Run tests**: `pnpm test:run`
 - **Watch tests**: `pnpm test`
 - **UI mode**: `pnpm test:ui`
