@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { QuoteWizardContext } from '../context/QuoteWizardContext';
+import { QuoteWizardContext } from '../context/QuoteWizardContextTypes';
 
 export function useQuoteWizardContext() {
   const context = useContext(QuoteWizardContext);

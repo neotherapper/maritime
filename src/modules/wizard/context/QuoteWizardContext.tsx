@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import { useReducer, useEffect } from 'react';
 import type { ReactNode } from 'react';
 
 export interface QuoteWizardState {
@@ -97,12 +97,7 @@ function quoteWizardReducer(state: QuoteWizardState, action: QuoteWizardAction):
   }
 }
 
-export interface QuoteWizardContextType {
-  state: QuoteWizardState;
-  dispatch: React.Dispatch<QuoteWizardAction>;
-}
-
-export const QuoteWizardContext = createContext<QuoteWizardContextType | undefined>(undefined);
+import { QuoteWizardContext } from './QuoteWizardContextTypes';
 
 interface QuoteWizardProviderProps {
   children: ReactNode;

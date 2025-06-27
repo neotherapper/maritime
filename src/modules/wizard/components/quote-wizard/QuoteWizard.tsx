@@ -6,9 +6,10 @@ import { Review } from '../review/Review';
 import type { QuoteRequest } from '../review/Review';
 import { submitQuoteRequest } from '../../services/api';
 import { useQuoteWizardContext } from '../../hooks/useQuoteWizardContext';
+import type { QuoteWizardContextType } from '../../context/QuoteWizardContextTypes';
 
 export const QuoteWizard: React.FC = () => {
-  const { state, dispatch } = useQuoteWizardContext();
+  const { state, dispatch } = useQuoteWizardContext() as QuoteWizardContextType;
 
   // Handle Step 1 next
   const handleStep1Next = (data: { companyName: string; contactEmail: string }) => {

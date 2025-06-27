@@ -199,7 +199,7 @@ export const Step3: React.FC<Step3Props> = ({ onReview, onBack, onFieldChange, i
           )}
         </div>
 
-        <div className="flex space-x-4 pt-4">
+        <div className="flex justify-between pt-4">
           <button
             data-testid="back-button"
             onClick={onBack}
@@ -212,7 +212,7 @@ export const Step3: React.FC<Step3Props> = ({ onReview, onBack, onFieldChange, i
             data-testid="review-button"
             onClick={handleReview}
             disabled={!isFormValid()}
-            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+            className={`px-4 py-2 rounded focus:outline-none focus:ring-2 transition-colors ${isFormValid() ? 'bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
             type="button"
           >
             Review
