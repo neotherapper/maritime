@@ -26,6 +26,28 @@ This project uses `pnpm` as the package manager.
 
 - **Run tests**: `pnpm e2e`
 - **UI mode**: `pnpm e2e:ui`
+- **Debug mode**: `pnpm playwright test --debug` - Opens browser for debugging
+- **Headed mode**: `pnpm playwright test --headed` - Shows browser during test execution
+
+#### E2E Testing Notes for AI Agents
+
+Since AI agents cannot see the browser UI during E2E tests, use these approaches for effective debugging:
+
+1. **Use headed mode** (`--headed`) to see browser interactions in terminal output
+2. **Add console.log statements** in test files to track execution flow
+3. **Use Playwright's built-in assertions** which provide detailed error messages
+4. **Check for element visibility issues** by adding explicit waits
+5. **Verify routing** - ensure the app navigates to correct URLs
+6. **Mock API responses** properly in `/src/mocks/handlers.ts`
+7. **Check test data-testid attributes** match between components and tests
+
+Common E2E issues to check:
+
+- Missing or incorrect data-testid attributes
+- Component import path issues after folder restructuring
+- API mocking configuration
+- Routing configuration
+- Element timing and visibility
 
 ### Component Development with Storybook
 
